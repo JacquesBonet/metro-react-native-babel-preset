@@ -19,7 +19,6 @@ function isTSXSource(fileName) {
 
 const defaultPlugins = [
   [require('@babel/plugin-proposal-optional-catch-binding')],
-  [require('@babel/plugin-transform-block-scoping')],
   // the flow strip types plugin must go BEFORE class properties!
   // there'll be a test case that fails if you don't.
   [require('@babel/plugin-transform-flow-strip-types')],
@@ -29,12 +28,7 @@ const defaultPlugins = [
     {loose: true},
   ],
   [require('@babel/plugin-syntax-dynamic-import')],
-  [require('@babel/plugin-syntax-export-default-from')],
   [require('@babel/plugin-transform-computed-properties')],
-  [require('@babel/plugin-transform-destructuring')],
-  [require('@babel/plugin-transform-function-name')],
-  [require('@babel/plugin-transform-literals')],
-  [require('@babel/plugin-transform-parameters')],
   [require('@babel/plugin-transform-shorthand-properties')],
   [require('@babel/plugin-transform-react-jsx')],
   [require('@babel/plugin-transform-regenerator')],
@@ -42,34 +36,10 @@ const defaultPlugins = [
   [require('@babel/plugin-transform-unicode-regex')],
 ];
 
-const es2015ExportDefault = [
-  require('@babel/plugin-proposal-export-default-from'),
-];
-
-const es2015ImportExport = [
-  require('@babel/plugin-transform-modules-commonjs'),
-  {
-    strict: false,
-    strictMode: false, // prevent "use strict" injections
-    allowTopLevelThis: true, // dont rewrite global `this` -> `undefined`
-  },
-];
-
-const es2015ArrowFunctions = [
-  require('@babel/plugin-transform-arrow-functions'),
-];
-const es2015Classes = [require('@babel/plugin-transform-classes')];
-const es2015ForOf = [require('@babel/plugin-transform-for-of'), {loose: true}];
-const es2015Spread = [require('@babel/plugin-transform-spread')];
-const es2015TemplateLiterals = [
-  require('@babel/plugin-transform-template-literals'),
-  {loose: true}, // dont 'a'.concat('b'), just use 'a'+'b'
-];
 const exponentiationOperator = [
   require('@babel/plugin-transform-exponentiation-operator'),
 ];
 const objectAssign = [require('@babel/plugin-transform-object-assign')];
-const objectRestSpread = [require('@babel/plugin-proposal-object-rest-spread')];
 const nullishCoalescingOperator = [
   require('@babel/plugin-proposal-nullish-coalescing-operator'),
   {loose: true},
@@ -100,31 +70,11 @@ const getPreset = (src, options) => {
 
   const extraPlugins = [];
 
-  if (!options || !options.disableImportExportTransform) {
-    extraPlugins.push(es2015ImportExport, es2015ExportDefault);
-  }
-
-  if (hasClass) {
-    extraPlugins.push(es2015Classes);
-  }
-  if (isNull || src.indexOf('=>') !== -1) {
-    extraPlugins.push(es2015ArrowFunctions);
-  }
-  if (isNull || hasClass || src.indexOf('...') !== -1) {
-    extraPlugins.push(es2015Spread);
-    extraPlugins.push(objectRestSpread);
-  }
-  if (isNull || src.indexOf('`') !== -1) {
-    extraPlugins.push(es2015TemplateLiterals);
-  }
   if (isNull || src.indexOf('**') !== -1) {
     extraPlugins.push(exponentiationOperator);
   }
   if (isNull || src.indexOf('Object.assign') !== -1) {
     extraPlugins.push(objectAssign);
-  }
-  if (hasForOf) {
-    extraPlugins.push(es2015ForOf);
   }
   if (hasForOf || src.indexOf('Symbol') !== -1) {
     extraPlugins.push(symbolMember);
