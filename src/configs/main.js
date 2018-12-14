@@ -36,6 +36,20 @@ const defaultPlugins = [
   [require('@babel/plugin-transform-unicode-regex')],
 ];
 
+
+const es2015ExportDefault = [
+  require('@babel/plugin-proposal-export-default-from'),
+];
+
+const es2015ImportExport = [
+  require('@babel/plugin-transform-modules-commonjs'),
+  {
+    strict: false,
+    strictMode: false, // prevent "use strict" injections
+    allowTopLevelThis: true, // dont rewrite global `this` -> `undefined`
+  },
+];
+
 const exponentiationOperator = [
   require('@babel/plugin-transform-exponentiation-operator'),
 ];
