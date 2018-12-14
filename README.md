@@ -1,8 +1,5 @@
 # remove unnecessary plugins
 
-    "@babel/plugin-proposal-export-default-from": "^7.0.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/plugin-syntax-export-default-from": "^7.0.0",
     "@babel/plugin-transform-arrow-functions": "^7.0.0",
     "@babel/plugin-transform-block-scoping": "^7.0.0",
     "@babel/plugin-transform-classes": "^7.0.0",
@@ -10,9 +7,7 @@
     "@babel/plugin-transform-for-of": "^7.0.0",
     "@babel/plugin-transform-function-name": "^7.0.0",
     "@babel/plugin-transform-literals": "^7.0.0",
-    "@babel/plugin-transform-modules-commonjs": "^7.0.0",
     "@babel/plugin-transform-parameters": "^7.0.0",
-    "@babel/plugin-transform-regenerator": "^7.0.0",
     "@babel/plugin-transform-spread": "^7.0.0",
     "@babel/plugin-transform-template-literals": "^7.0.0",
 
