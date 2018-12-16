@@ -1,82 +1,60 @@
 {
-  "private": true,
-  "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.0.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
-    "@babel/plugin-transform-async-to-generator": "^7.0.0",
-    "@babel/plugin-transform-destructuring": "^7.0.0",
-    "@babel/plugin-transform-flow-strip-types": "^7.0.0",
-    "@babel/plugin-transform-modules-commonjs": "^7.0.0",
-    "@babel/plugin-transform-parameters": "^7.0.0",
-    "@babel/plugin-transform-react-jsx": "^7.0.0",
-    "@babel/plugin-transform-spread": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "acorn": "^5.1.2",
-    "babel-core": "^7.0.0-bridge",
-    "babel-eslint": "^10.0.1",
-    "babel-jest": "24.0.0-alpha.6",
-    "babel-preset-fbjs": "^3.0.1",
-    "chalk": "^2.4.1",
-    "chokidar": "^2.0.4",
-    "codecov": "^2.2.0",
-    "eslint": "5.1.0",
-    "eslint-config-fb-strict": "22.1.0",
-    "eslint-plugin-babel": "^5.2.1",
-    "eslint-plugin-flowtype": "2.43.0",
-    "eslint-plugin-import": "^2.9.0",
-    "eslint-plugin-jest": "21.8.0",
-    "eslint-plugin-jsx-a11y": "6.0.3",
-    "eslint-plugin-prettier": "2.6.0",
-    "eslint-plugin-react": "7.6.1",
-    "eslint-plugin-relay": "0.0.23",
-    "flow-bin": "^0.89.0",
-    "glob": "^7.1.1",
-    "istanbul-api": "^1.1.0",
-    "istanbul-lib-coverage": "^1.0.0",
-    "jest": "24.0.0-alpha.6",
-    "lerna": "2.4.0",
-    "micromatch": "^2.3.11",
-    "mkdirp": "^0.5.1",
-    "prettier": "1.13.6",
-    "pretty-format": "^23.4.1",
-    "progress": "^2.0.0",
-    "promise": "^7.1.1",
-    "temp": "^0.8.3"
+  "name": "metro-react-native-babel-preset",
+  "version": "0.50.0",
+  "description": "Babel preset for React Native applications",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:facebook/metro.git"
   },
   "scripts": {
-    "build-clean": "rm -rf ./packages/*/build",
-    "build": "node ./scripts/build.js",
-    "clean-all": "rm -rf ./node_modules && rm -rf ./packages/*/node_modules && yarn run build-clean",
-    "jest-coverage": "yarn run jest --coverage",
-    "lint": "eslint . --cache",
-    "lint-fix": "eslint . --fix --cache",
-    "postinstall": "node ./scripts/build.js",
-    "preinstall": "node ./scripts/preinstall.js",
-    "publish": "yarn run build-clean && yarn run build && lerna run prepare-release && lerna exec -- npm publish",
-    "postpublish": "lerna run cleanup-release",
-    "test-ci": "yarn run typecheck && yarn run lint && yarn run build && yarn run jest-coverage -i && node scripts/mapCoverage.js && codecov",
-    "test": "yarn run typecheck && yarn run lint && yarn run build && yarn run jest",
-    "typecheck": "flow check",
-    "watch": "yarn run build && node ./scripts/watch.js"
+    "prepare-release": "test -d build && rm -rf src.real && mv src src.real && mv build src",
+    "cleanup-release": "test ! -e build && mv src build && mv src.real src"
   },
-  "workspaces": [
-    "packages/*"
+  "keywords": [
+    "babel",
+    "preset",
+    "react-native"
   ],
-  "jest": {
-    "modulePathIgnorePatterns": [
-      "packages/[^/]+/build/"
-    ],
-    "testEnvironment": "node",
-    "testRegex": "/__tests__/.*-test\\.js$",
-    "timers": "fake",
-    "transform": {
-      "\\.js$": "<rootDir>/scripts/babelJestTransformer.js"
-    },
-    "setupFiles": [
-      "<rootDir>/scripts/setupJest.js"
-    ]
+  "license": "MIT",
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-proposal-optional-catch-binding": "^7.0.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-syntax-export-default-from": "^7.0.0",
+    "@babel/plugin-transform-arrow-functions": "^7.0.0",
+    "@babel/plugin-transform-block-scoping": "^7.0.0",
+    "@babel/plugin-transform-classes": "^7.0.0",
+    "@babel/plugin-transform-computed-properties": "^7.0.0",
+    "@babel/plugin-transform-destructuring": "^7.0.0",
+    "@babel/plugin-transform-exponentiation-operator": "^7.0.0",
+    "@babel/plugin-transform-flow-strip-types": "^7.0.0",
+    "@babel/plugin-transform-for-of": "^7.0.0",
+    "@babel/plugin-transform-function-name": "^7.0.0",
+    "@babel/plugin-transform-literals": "^7.0.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.0.0",
+    "@babel/plugin-transform-object-assign": "^7.0.0",
+    "@babel/plugin-transform-parameters": "^7.0.0",
+    "@babel/plugin-transform-react-display-name": "^7.0.0",
+    "@babel/plugin-transform-react-jsx": "^7.0.0",
+    "@babel/plugin-transform-react-jsx-source": "^7.0.0",
+    "@babel/plugin-transform-regenerator": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.0.0",
+    "@babel/plugin-transform-shorthand-properties": "^7.0.0",
+    "@babel/plugin-transform-spread": "^7.0.0",
+    "@babel/plugin-transform-sticky-regex": "^7.0.0",
+    "@babel/plugin-transform-template-literals": "^7.0.0",
+    "@babel/plugin-transform-typescript": "^7.0.0",
+    "@babel/plugin-transform-unicode-regex": "^7.0.0",
+    "@babel/template": "^7.0.0",
+    "metro-babel7-plugin-react-transform": "0.50.0",
+    "react-transform-hmr": "^1.0.4"
   },
-  "license": "MIT"
+  "peerDependencies": {
+    "@babel/core": "*"
+  }
 }
